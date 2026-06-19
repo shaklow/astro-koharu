@@ -12,7 +12,7 @@
 # =============================================================================
 site:
   title: Erencheの博客 # 网站名称
-  alternate: cosine # 网站英文名称 用于页脚、Logo、@ handle 等
+  alternate: QwQ # 网站英文名称 用于页脚、Logo、@ handle 等
   subtitle: WA 的一声就哭了 # 网站副标题
   name: Erenche # 作者名称 - 请修改为你的名字
   description: Erencheの博客 # 网站描述
@@ -28,6 +28,8 @@ site:
     - Astro
     - 技术
     # 请根据你的网站内容添加关键词
+
+
   # Header 背景图轮播列表，构建时动态生成 CSS 动画
   # 图片放在 public/ 目录下，路径为站点根路径
   # 不设置则使用默认: /img/site_header_1920.webp
@@ -40,6 +42,9 @@ site:
     #- /img/cover/1.webp
    #- /img/cover/3.webp
     #- /img/cover/5.webp
+
+
+
   # breadcrumbHome: 首页  # 面包屑导航中首页的显示名称（默认: '首页'）
   # icp:                         # ICP 备案号（可自定义链接）
   #   text: "粤ICP备xxxxxxxxxx号"
@@ -230,7 +235,7 @@ friends:
     applyDesc: 请在本页留言，格式如下 # 申请说明
     exampleYaml: | # 申请格式示例，会显示在页面上
       - site: 你的博客名称 # 站点名称
-        url: https://your-blog.com/ # 站点网址
+        url: https://blog.erenche.one/ # 站点网址
         owner: 你的昵称 # 昵称
         desc: 站点简介 # 站点简介
         image: https://your-blog.com/avatar.jpg # 头像链接
