@@ -11,23 +11,22 @@
 # Site Basic Information
 # =============================================================================
 site:
-  title: 余弦の博客 # 网站名称
+  title: Erencheの博客 # 网站名称
   alternate: cosine # 网站英文名称 用于页脚、Logo、@ handle 等
   subtitle: WA 的一声就哭了 # 网站副标题
-  name: cos # 作者名称 - 请修改为你的名字
-  description: 一个基于 Astro 的现代化博客主题 # 网站描述
+  name: Erenche # 作者名称 - 请修改为你的名字
+  description: Erencheの博客 # 网站描述
   avatar: /img/avatar.webp # 网站头像
   showLogo: true # 是否显示 Logo
-  author: Author # 作者名称 - 请修改为你的名字
+  author: Erenche # 作者名称 - 请修改为你的名字
   url: https://koharu.cosine.ren # 站点 URL 用于 RSS 和 SEO
   defaultOgImage: /img/avatar.webp # 默认 Open Graph 图片
-  startYear: 2024 # 建站年份
+  startYear: 2026 # 建站年份
   timezone: Asia/Shanghai # 时区配置 (IANA 格式)，用于日期显示和处理
   keywords: # SEO 关键词 (全局)
     - 博客
     - Astro
     - 技术
-    - 前端
     # 请根据你的网站内容添加关键词
   # breadcrumbHome: 首页  # 面包屑导航中首页的显示名称（默认: '首页'）
   # icp:                         # ICP 备案号（可自定义链接）
@@ -166,7 +165,7 @@ social:
     icon: ri:github-fill # Remix Icon 的 GitHub 图标
     color: '#191717' # (可选) 图标颜色
   email:
-    url: mailto:your@email.com # 替换为你的邮箱，需加 mailto: 前缀
+    url: mailto:erenche@qq.com # 替换为你的邮箱，需加 mailto: 前缀
     icon: ri:mail-line
     color: '#55acd5'
   rss:
@@ -225,11 +224,11 @@ friends:
         image: https://your-blog.com/avatar.jpg # 头像链接
         color: "#ffc0cb" # 主题色（可选）
   data: # 友链列表
-    - site: 余弦の博客
-      url: https://blog.cosine.ren
+    - site: Erencheの博客
+      url: https://blog.erenche.one
       owner: cos
       desc: FE / ACG / 手工 / 深色模式强迫症 / INFP / 兴趣广泛养两只猫的老宅女 / remote
-      image: https://blog.cosine.ren/img/avatar.webp
+      image: https://blog.erenche.one/img/avatar.webp
       color: '#ed788b'
     - site: 示例博客 A
       url: https://example-a.com
@@ -492,7 +491,7 @@ navigation:
     # path: # 用于区分不同文章的自定义 js 路径，如果您的文章路径不是 location.pathname，需传此参数
     # lang: # 语言 (默认: 'zh-CN')
 comment:
-  provider: none  # 'remark42' | 'giscus' | 'waline' | 'twikoo' | 'none'
+  provider: waline  # 'remark42' | 'giscus' | 'waline' | 'twikoo' | 'none'
   # remark42:
   #   host: https://comment.example.com/
   #   siteId: your-site-id
@@ -507,45 +506,45 @@ comment:
   #   inputPosition: top               # 输入框位置 ('top' | 'bottom')
   #   lang: zh-CN                      # 语言
 
-  # waline:
-  #   serverURL: https://your-waline.vercel.app  # Waline 服务端地址 (必填)
-  #   lang: zh-CN                      # 语言 (默认: 'zh-CN')
-  #   dark: html.dark                  # 暗黑模式 (默认: 'html.dark')
-  #                                    # 可选: true (自适应) | false (禁用) | CSS选择器字符串
-  #   meta:                            # 评论者信息字段 (默认: ['nick', 'mail', 'link'])
-  #     - nick
-  #     - mail
-  #     - link
-  #   requiredMeta:                    # 必填字段 (默认: [])
-  #     - nick
-  #   login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
-  #   wordLimit: 0                     # 评论字数限制 (0 = 无限制, 默认: 0)
-  #                                    # 可选: 单个数字 | [min, max] 数组
-  #   pageSize: 10                     # 每页评论数 (默认: 10)
-  #   imageUploader: false             # 图片上传功能 (默认: false)
-  #   highlighter: true                # 代码高亮 (默认: true)
-  #   texRenderer: false               # LaTeX 渲染 (默认: false)
-  #   search: false                    # 搜索功能 (默认: false)
-  #   reaction: false                  # 文章反应功能 (默认: false)
-  #                                    # 可选: true | false | 字符串数组 (自定义反应图标)
-  #   emoji: true                      # 表情包配置 (默认: ['//unpkg.com/@waline/emojis@1.2.0/weibo'])
-  #                                    # 可选: true | false | 字符串/对象数组
-  #                                    # 预设表情包: '//unpkg.com/@waline/emojis@1.2.0/weibo'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/alus'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/bilibili'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/qq'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/tieba'
-  #                                    #           '//unpkg.com/@waline/emojis@1.2.0/tw-emoji'
-  #   commentSorting: latest           # 评论排序 ('latest' | 'oldest' | 'hottest', 默认: 'latest')
-  #   noCopyright: false               # 隐藏页脚版权信息 (默认: false)
-  #   comment: true                    # 评论数统计 (默认: true)
-  #   pageview: true                   # 页面访问量统计 (默认: true)
-  #   # recaptchaV3Key: ''             # reCAPTCHA v3 Key (可选)
-  #   # turnstileKey: ''               # Cloudflare Turnstile Key (可选)
-  #   # locale:                        # 自定义语言显示 (可选)
-  #   #   placeholder: '请留言...'      # 自定义输入框占位文本
-  twikoo:
-    envId: https://your-twikoo.vercel.app  # Twikoo 环境 ID (腾讯云) 或 Vercel 环境地址 (必填)
+  waline:
+    serverURL: co.erenche.one  # Waline 服务端地址 (必填)
+    lang: zh-CN                      # 语言 (默认: 'zh-CN')
+    dark: html.dark                  # 暗黑模式 (默认: 'html.dark')
+                                     # 可选: true (自适应) | false (禁用) | CSS选择器字符串
+    meta:                            # 评论者信息字段 (默认: ['nick', 'mail', 'link'])
+      - nick
+      - mail
+      - link
+    requiredMeta:                    # 必填字段 (默认: [])
+      - nick
+    login: enable                    # 登录模式 ('enable' | 'disable' | 'force', 默认: 'enable')
+    wordLimit: 0                     # 评论字数限制 (0 = 无限制, 默认: 0)
+                                     # 可选: 单个数字 | [min, max] 数组
+    pageSize: 10                     # 每页评论数 (默认: 10)
+    imageUploader: false             # 图片上传功能 (默认: false)
+    highlighter: true                # 代码高亮 (默认: true)
+    texRenderer: false               # LaTeX 渲染 (默认: false)
+    search: false                    # 搜索功能 (默认: false)
+    reaction: false                  # 文章反应功能 (默认: false)
+                                     # 可选: true | false | 字符串数组 (自定义反应图标)
+    emoji: true                      # 表情包配置 (默认: ['//unpkg.com/@waline/emojis@1.2.0/weibo'])
+                                     # 可选: true | false | 字符串/对象数组
+                                     # 预设表情包: '//unpkg.com/@waline/emojis@1.2.0/weibo'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/alus'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/bilibili'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/qq'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/tieba'
+                                     #           '//unpkg.com/@waline/emojis@1.2.0/tw-emoji'
+    commentSorting: latest           # 评论排序 ('latest' | 'oldest' | 'hottest', 默认: 'latest')
+    noCopyright: false               # 隐藏页脚版权信息 (默认: false)
+    comment: true                    # 评论数统计 (默认: true)
+    pageview: true                   # 页面访问量统计 (默认: true)
+    # recaptchaV3Key: ''             # reCAPTCHA v3 Key (可选)
+    # turnstileKey: ''               # Cloudflare Turnstile Key (可选)
+    # locale:                        # 自定义语言显示 (可选)
+    #   placeholder: '请留言...'      # 自定义输入框占位文本
+  #twikoo:
+    #envId: https://your-twikoo.vercel.app  # Twikoo 环境 ID (腾讯云) 或 Vercel 环境地址 (必填)
     # region: ap-shanghai              # 环境地域，默认为 ap-shanghai
     # path: location.pathname          # 用于区分不同文章的自定义 js 路径
     # lang: zh-CN                     # 语言 (默认: 'zh-CN')
@@ -651,7 +650,7 @@ bangumi:
 #     - urlTemplate: URL 模板，支持占位符 {path}（文件绝对路径）
 # -----------------------------------------------------------------------------
 dev:
-  localProjectPath: '/Users/yourname/path/to/astro-koharu' # 请修改为你的项目绝对路径
+  localProjectPath: '/home/erenche/Desktop/astro-koharu/' # 请修改为你的项目绝对路径
   contentRelativePath: 'src/content/blog'
   editors:
     - id: vscode
