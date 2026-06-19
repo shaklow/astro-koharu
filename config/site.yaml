@@ -35,7 +35,7 @@ site:
     
     #- /img/site_header_1920.webp
     - /img/site_header.webp
-    - /img/site_header_2.webp
+    #- /img/site_header_2.webp
     - /img/site_header_3.webp
     #- /img/cover/1.webp
    #- /img/cover/3.webp
