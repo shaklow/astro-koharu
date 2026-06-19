@@ -222,6 +222,11 @@ export const seoConfig = {
 const BUILT_IN_COVERS = Array.from({ length: 21 }, (_, i) => `/img/cover/${i + 1}.webp`);
 export const defaultCoverList = yamlConfig?.defaultCoverList?.length ? yamlConfig.defaultCoverList : BUILT_IN_COVERS;
 
+/** Header background images for auto-rotation. Falls back to single default image. */
+export const headerImages: string[] = yamlConfig?.site?.siteHeaderImages?.length
+  ? yamlConfig.site.siteHeaderImages
+  : ['/img/site_header_1920.webp'];
+
 // Analytics config — reuses AnalyticsConfig from config/types.ts
 
 // Christmas config types

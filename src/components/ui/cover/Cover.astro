@@ -1,6 +1,6 @@
 ---
 import { Routes } from '@constants/router';
-import { createArticleStatsConfig, siteConfig } from '@constants/site-config';
+import { createArticleStatsConfig, headerImages, siteConfig } from '@constants/site-config';
 import { getPostReadingTime } from '@lib/content/posts';
 import { displayDate } from '@lib/date';
 import { getLqipStyle } from '@lib/lqip';
@@ -24,8 +24,74 @@ const { date, updated, title: dataTitle, draft } = data?.data ?? {};
 const readState = data ? getPostReadingTime(data) : null;
 const isDraft = import.meta.env.DEV && draft === true;
 
-// 获取横幅图片的 LQIP 样式
-const bannerLqipStyle = getLqipStyle('/img/site_header_1920.webp');
+// --- Header image rotation ---
+const SHOW_DURATION = 6; // seconds fully visible per image
+const FADE_DURATION = 2; // crossfade overlap (fade-out and fade-in happen simultaneously)
+const SLOT_GAP = SHOW_DURATION; // interval between adjacent images' fade-in start
+const TOTAL_CYCLE = (headerImages.length - 1) * SLOT_GAP + SHOW_DURATION + FADE_DURATION;
+const isMultiImage = headerImages.length > 1;
+
+/** Derive responsive srcset from a single image path */
+function srcsetAttr(path: string): string | null {
+  if (path.includes('_1920')) {
+    return `${path.replace('_1920', '_800')} 800w, ${path} 1200w`;
+  }
+  if (!path.includes('_800') && path.endsWith('.webp')) {
+    const base = path.replace(/\.webp$/, '');
+    return `${base}_800.webp 800w, ${path} 1200w`;
+  }
+  return null;
+}
+
+/** Generate CSS @keyframes for header image crossfade */
+function headerKeyframesCSS(): string {
+  if (!isMultiImage) return '';
+
+  return headerImages
+    .map((_, i) => {
+      // Each image occupies a SLOT_GAP interval.
+      // Fade-in and fade-out overlap with adjacent images' transitions.
+      const fadeInEnd = i * SLOT_GAP + FADE_DURATION;
+      const fadeOutStart = i * SLOT_GAP + SHOW_DURATION;
+      const slotEnd = fadeOutStart + FADE_DURATION;
+      const pct = (t: number) => ((t / TOTAL_CYCLE) * 100).toFixed(1);
+
+      const keyframes = [`@keyframes headerFade${i} {`];
+
+      if (i === 0) {
+        // Image 0: starts visible; fade-out in its slot; wrap-around fade-in
+        // at the end of the cycle (overlaps last image's fade-out)
+        const wrapFadeIn = TOTAL_CYCLE - FADE_DURATION;
+        keyframes.push(
+          `  0% { opacity: 1; }`,
+          `  ${pct(fadeOutStart)}% { opacity: 1; }`,
+          `  ${pct(slotEnd)}% { opacity: 0; }`,
+          `  ${pct(wrapFadeIn)}% { opacity: 0; }`,
+          `  100% { opacity: 1; }`,
+        );
+      } else {
+        keyframes.push(
+          `  0% { opacity: 0; }`,
+          `  ${pct(i * SLOT_GAP)}% { opacity: 0; }`,
+          `  ${pct(fadeInEnd)}% { opacity: 1; }`,
+          `  ${pct(fadeOutStart)}% { opacity: 1; }`,
+          `  ${pct(slotEnd)}% { opacity: 0; }`,
+          `  100% { opacity: 0; }`,
+        );
+      }
+
+      keyframes.push('}');
+      return keyframes.join('\n');
+    })
+    .join('\n');
+}
+
+// Pre-compute keyframes CSS string (is:inline on <style> is unreliable with dynamic content)
+const headerKeyframesCss = headerKeyframesCSS();
+const styleTag = headerKeyframesCss ? `<style>${headerKeyframesCss}</style>` : '';
+
+// LQIP for the first header image
+const bannerLqipStyle = getLqipStyle(headerImages[0]);
 
 const locale = getLocaleFromUrl(Astro.url.pathname);
 
@@ -107,16 +173,25 @@ const pageStatsConfig = href ? createArticleStatsConfig(href) : null;
     id="banner-box"
     style={bannerLqipStyle}
   >
-    <img
-      src="/img/site_header_1920.webp"
-      alt="cover"
-      class="h-full w-full object-cover"
-      sizes="50vw"
-      srcset="/img/site_header_800.webp 800w,/img/site_header_1920.webp 1200w"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
+    {headerImages.map((img, i) => {
+      const srcset = srcsetAttr(img);
+      return (
+        <img
+          src={img}
+          alt="cover"
+          class="h-full w-full object-cover"
+          class:list={[{ 'absolute inset-0': isMultiImage }]}
+          sizes="50vw"
+          {...(srcset ? { srcset } : {})}
+          style={isMultiImage ? `animation: headerFade${i} ${TOTAL_CYCLE}s infinite` : undefined}
+          loading="eager"
+          fetchpriority={i === 0 ? 'high' : 'low'}
+          decoding="async"
+        />
+      );
+    })}
   </div>
   <WaveSvg />
 </div>
+
+<Fragment set:html={styleTag} />

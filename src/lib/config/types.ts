@@ -29,6 +29,8 @@ export interface SiteBasicConfig {
   icp?: string | { text: string; link?: string };
   /** Enable slug transliteration (converts CJK characters to pinyin/romaji) @default false */
   enableSlugTransliteration?: boolean;
+  /** Header background images for auto-rotation. Falls back to single /img/site_header_1920.webp */
+  siteHeaderImages?: string[];
 }
 
 // =============================================================================
